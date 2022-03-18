@@ -122,6 +122,7 @@ public class MyFirstController2 {
         return "error";
     }
 
+    // Delete product
     @GetMapping("/deleteProduct/{id}")
     public String getDeleteProduct(@PathVariable(name="id") int id, Model model)
     {
