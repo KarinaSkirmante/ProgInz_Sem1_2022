@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+
+<body>
+    <h1>Lūdzu ievadiet produkta parametrus</h1>
+    <form action="#" th:action="@{/addProduct}" th:product="${product}" method="post">
+        <label for="pname">Virsraksts</label>
+        <input type="text" th:field="*{title}"><br><br>
+        <label for="pdesc">Apraksts</label>
+        <input type="text" th:field="*{description}"><br><br>
+        <label for="pquantity">Daudzums</label>
+        <input type="text" th:field="*{quantity}"><br><br>
+        <label for="pprice">Cena</label>
+        <input type="text" th:field="*{price}"><br><br>
+        <input type="submit" value="Saglabāt">
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+</head>
+
+<body>
+    <h1>Informacija par produktu</h1>
+    <table>
+        <tr th:each="product: ${product}">
+            <td th:text="${product.getId()}" />
+            <td th:text="${product.getTitle()}" />
+            <td th:text="${product.getDescription()}" />
+            <td th:text="${product.getQuantity()}" />
+            <td th:text="${product.getPrice()}" />
+        </tr>
+    </table>
+</body>
+
+</html>
