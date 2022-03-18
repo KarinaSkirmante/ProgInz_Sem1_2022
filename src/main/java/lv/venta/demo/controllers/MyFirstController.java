@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import lv.venta.demo.models.Product;
 
+
 @Controller
 public class MyFirstController {
 	
@@ -173,6 +174,12 @@ public class MyFirstController {
 	}
 	return "error-page";
 }
+	
+	@GetMapping("/filter")
+	public String getFilter()
+	{
+		return "error-page";
+	}
 	
 	
 	
