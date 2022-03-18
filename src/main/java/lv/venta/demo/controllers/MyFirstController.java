@@ -117,6 +117,7 @@ public class MyFirstController2 {
         return "redirect:/error";
     }
 
+    // Error page
     @GetMapping("/error")
     public String getError() {
         return "error";
