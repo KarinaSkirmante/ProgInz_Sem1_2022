@@ -1,0 +1,19 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<h1>LÅ«dzu ievadiet produkta parametrus</h1>
+
+
+<form action="#" th:action="@{/updateProduct/__${id}__}" th:object="${product}" method="post">
+	<label>Nosaukums</label>
+	<input type="text" th:field="*{title}"> <!-- tiek saglabÄ�ts teksts product.title -->
+	<label>Apraksts</label>
+	<input type="text" th:field="*{description}">
+	<label>Cena</label>
+	<input type="text" th:field="*{price}">
+	<label>Daudzums</label>
+	<input type="text" th:field="*{quantity}">
+
+	<input type="submit" value="Saglabāt redigēto produktu">
+</form>
+
+</html>
