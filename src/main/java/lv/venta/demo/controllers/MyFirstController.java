@@ -146,6 +146,7 @@ public class MyFirstController {
 		return "redirect:/error";//localhost:8080/error
 	}
 	
+	//kontrolieris izsauk  error lapas parādīšanos
 	@GetMapping("/error")//localhost:8080/error
 	public String getError()
 	{
