@@ -16,8 +16,7 @@ public interface ProductCRUD {
 	public abstract Product readProductById(int id) throws Exception ;
 	
 	//U - update
-	public abstract boolean updateProductById(int id, String title, 
-			String description, int quantity, float price );
+	public abstract boolean updateProductById(int id, Product product );
 	
 	//D - delete
 	public abstract boolean deleteProductById(int id);

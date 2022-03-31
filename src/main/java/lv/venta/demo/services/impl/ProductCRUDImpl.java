@@ -64,8 +64,18 @@ public class ProductCRUDImpl implements ProductCRUD {
 	}
 
 	@Override
-	public boolean updateProductById(int id, String title, String description, int quantity, float price) {
-		// TODO Auto-generated method stub
+	public boolean updateProductById(int id, Product product) {
+		for(Product temp: allProducts)
+		{
+			if(temp.getId()==id)
+			{
+				temp.setTitle(product.getTitle());
+				temp.setDescription(product.getDescription());
+				temp.setPrice(product.getPrice());
+				temp.setQuantity(product.getQuantity());
+				return true;
+			}			
+		}
 		return false;
 	}
 

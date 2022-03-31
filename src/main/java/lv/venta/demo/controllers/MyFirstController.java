@@ -118,33 +118,22 @@ public class MyFirstController {
 	@GetMapping("/updateProduct/{id}")//localhost:8080/updateProduct/2
 	public String getUpdateProduct(@PathVariable(name="id") int id, Model model)
 	{
-		for(Product temp: allProducts)
-		{
-			if(temp.getId()==id)
-			{
-				model.addAttribute("product", temp);
-				return "update-product-page";//parādīsieis update-product-page.html
-			}
+		try {
+			model.addAttribute("product", productCRUDService.readProductById(id));
+			return "update-product-page";//parādīsieis update-product-page.html
 		}
-		
-		return "error-page";
+		catch (Exception e) {
+			return "error-page";
+		}
 	}
 	
 	@PostMapping("/updateProduct/{id}")
 	public String postUpdateProduct(@PathVariable(name="id") int id, Product product)
 	{
-		for(Product temp: allProducts)
-		{
-			if(temp.getId()==id)
-			{
-				temp.setTitle(product.getTitle());
-				temp.setDescription(product.getDescription());
-				temp.setPrice(product.getPrice());
-				temp.setQuantity(product.getQuantity());
-				return "redirect:/allProducts/"+id; //tiks izsaukt localhost:8080/allProducts/2
-			}			
-		}
-		return "redirect:/error";//localhost:8080/error
+		if(productCRUDService.updateProductById(id, product))
+			return "redirect:/allProducts/"+id; //tiks izsaukt localhost:8080/allProducts/2
+		else
+			return "redirect:/error";//localhost:8080/error
 	}
 	
 	//kontrolieris izsauk  error lapas parādīšanos
