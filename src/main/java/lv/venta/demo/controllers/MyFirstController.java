@@ -3,6 +3,7 @@ package lv.venta.demo.controllers;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lv.venta.demo.models.Product;
+import lv.venta.demo.services.ProductCRUD;
 
 //... - ārējais repo nosaukums
 //git checkout master
@@ -21,12 +23,9 @@ import lv.venta.demo.models.Product;
 @Controller
 public class MyFirstController {
 	
-	
-	private ArrayList<Product> allProducts = new ArrayList<>
-	(Arrays.asList(new Product("abols", "garsigs", 10, 0.99f),
-			new Product("bumbieris", "zals", 2, 0.12f), 
-			new Product("arbuzs", "salds", 3, 1.99f)));
-	
+	@Autowired
+	private ProductCRUD productCRUDService;
+		
 	@GetMapping("/home") // url - localhost:8080/home
 	public String getHomePage()
 	{
@@ -59,7 +58,7 @@ public class MyFirstController {
 	@GetMapping("/allProducts") //url - localhost:8080/allProducts
 	public String getAllProducts(Model model)
 	{
-		model.addAttribute("object", allProducts);
+		model.addAttribute("object", productCRUDService.readAllProducts());
 		return "all-product-page";//all-product-page.html
 	}
 	
@@ -68,16 +67,14 @@ public class MyFirstController {
 	@GetMapping("/allProductsFilter") //url - localhost:8080/allProductsFilter?id=2
 	public String getAllProductFilter(@RequestParam(name="id") int id , Model model)
 	{
-		for(Product temp: allProducts)
-		{
-			if(temp.getId()==id)
-			{
-				model.addAttribute("object", temp);
-				return "one-product-page";//parādīsieis one-product-page.html
-			}
+		try {
+			model.addAttribute("object", productCRUDService.readProductById(id));
+			return "one-product-page";//parādīsieis one-product-page.html
+		}
+		catch (Exception e) {
+			return "error-page";
 		}
 		
-		return "error-page";
 	}
 	
 	

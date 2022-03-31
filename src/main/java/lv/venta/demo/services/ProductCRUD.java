@@ -14,7 +14,7 @@ public interface ProductCRUD {
 	public abstract ArrayList<Product> readAllProducts();
 	
 	//R  - read or retrieve  - one
-	public abstract Product readProductById(int id);
+	public abstract Product readProductById(int id) throws Exception ;
 	
 	//U - update
 	public abstract boolean updateProductById(int id, String title, 
