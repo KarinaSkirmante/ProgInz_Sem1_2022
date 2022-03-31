@@ -105,11 +105,12 @@ public class MyFirstController {
 	@PostMapping("/addProduct")
 	public String postAddProduct(Product product)//aizpildītais produkts
 	{
-		Product newProduct = new Product(product.getTitle(),
-				product.getDescription(), product.getQuantity(),
-				product.getPrice());
-		allProducts.add(newProduct);
-		return "redirect:/allProducts";//post norda uz kuru url adresi pāŗlekt
+		
+		if(productCRUDService.createNewProduct(product))
+			return "redirect:/allProducts";//post norda uz kuru url adresi pāŗlekt
+		else
+			return "redirect:/error";
+			
 	}
 	//3.1 redirect uz /allProduct url
 

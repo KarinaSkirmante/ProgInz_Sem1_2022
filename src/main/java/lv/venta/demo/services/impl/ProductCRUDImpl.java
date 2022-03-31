@@ -18,9 +18,31 @@ public class ProductCRUDImpl implements ProductCRUD {
 
 	
 	@Override
-	public boolean createNewProduct(String title, String description, int quantity, float price) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean createNewProduct(Product product) {
+		
+		boolean isFound = false;
+		for(Product pr: allProducts)
+		{
+			if(pr.getTitle().equals(product.getTitle()) && 
+					pr.getDescription().equals(product.getDescription()))
+					{
+						isFound = true;
+						break;
+					}
+		}
+		if(!isFound)
+		{
+			Product newProduct = new Product(product.getTitle(),
+				product.getDescription(), product.getQuantity(),
+				product.getPrice());
+		
+			allProducts.add(newProduct);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	@Override

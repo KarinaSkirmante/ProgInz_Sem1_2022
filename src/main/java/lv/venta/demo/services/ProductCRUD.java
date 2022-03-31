@@ -7,8 +7,7 @@ import lv.venta.demo.models.Product;
 public interface ProductCRUD {
 	//CRUD
 	//C  - create
-	public abstract boolean createNewProduct(String title, 
-			String description, int quantity, float price);
+	public abstract boolean createNewProduct(Product product);
 	
 	//R  - read or retrieve  -all
 	public abstract ArrayList<Product> readAllProducts();
