@@ -81,7 +81,16 @@ public class ProductCRUDImpl implements ProductCRUD {
 
 	@Override
 	public boolean deleteProductById(int id) {
-		// TODO Auto-generated method stub
+		//3. sameklējam konkrēto produktu pēc tā id
+		//4. dzēsam to produktu
+		for(Product temp: allProducts)
+		{
+			if(temp.getId()==id)
+			{
+				allProducts.remove(temp);
+				return true;
+			}
+		}
 		return false;
 	}
 

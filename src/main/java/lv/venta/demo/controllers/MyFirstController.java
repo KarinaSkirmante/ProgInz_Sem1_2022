@@ -148,20 +148,13 @@ public class MyFirstController {
 	//2. funkcijas deklarācija, pieliekam modeli
 	public String getDeleteProduct(@PathVariable(name="id") int id, Model model)
 	{
-	//3. sameklējam konkrēto produktu pēc tā id
-	//4. dzēsam to produktu
-	for(Product temp: allProducts)
-	{
-		if(temp.getId()==id)
+		if(productCRUDService.deleteProductById(id))
 		{
-			allProducts.remove(temp);
-			//5. padodam visu produktu sarkstu caur modeli frontendam
-			//6. paradām lapu all-product-page.html
-			model.addAttribute("object", allProducts);
+			model.addAttribute("object", productCRUDService.readAllProducts());
 			return "all-product-page";//all-product-page.html
 		}
-	}
-	return "error-page";
+		else
+			return "error-page";
 }
 	
 	@GetMapping("/filter")
