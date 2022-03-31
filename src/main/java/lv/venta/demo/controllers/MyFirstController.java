@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import lv.venta.demo.models.Product;
 
+//... - ārējais repo nosaukums
+//git checkout master
+//git pull ... master
+//git merge kristians
+//git push ... master
 
 @Controller
 public class MyFirstController {
