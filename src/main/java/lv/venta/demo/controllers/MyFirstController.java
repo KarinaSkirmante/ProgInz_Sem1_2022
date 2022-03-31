@@ -82,16 +82,13 @@ public class MyFirstController {
 	@GetMapping("/allProducts/{id}")
 	public String getAllProductsById(@PathVariable(name="id") int id, Model model)
 	{
-		for(Product temp: allProducts)
-		{
-			if(temp.getId()==id)
-			{
-				model.addAttribute("object", temp);
-				return "one-product-page";//parādīsieis one-product-page.html
-			}
+		try {
+			model.addAttribute("object", productCRUDService.readProductById(id));
+			return "one-product-page";//parādīsieis one-product-page.html
 		}
-		
-		return "error-page";
+		catch (Exception e) {
+			return "error-page";
+		}
 	}
 	
 	
