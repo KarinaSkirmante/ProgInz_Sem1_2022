@@ -1,6 +1,7 @@
 package lv.venta.demo.models;
 
 public class Product {
+    //Jekabs comment
     private int id;
     private String title;
     private String description;
