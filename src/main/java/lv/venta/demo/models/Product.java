@@ -19,6 +19,9 @@ public class Product {
     @Min(value=1)
     @Max(value=1000)
 	int quantity;
+    
+    @Min(value=0)
+    @Max(value=10000)
     private float price;
     
     private static int counter = 1000;
