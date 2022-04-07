@@ -7,25 +7,25 @@
 	<table>
 	<tr>
 		<td><label>Nosaukums</label></td>
-		<td><input type="text" th:field="*{title}"></td> <!-- tiek saglabāts teksts product.title -->
+		<td><input type="text" th:field="*{title}"/></td> <!-- tiek saglabāts teksts product.title -->
 		<td th:if="${#fields.hasErrors('title')}" th:errors="*{title}" />
 	</tr>
 	
 	<tr>
 		<td><label>Apraksts</label></td>
-		<td><input type="text" th:field="*{description}"></td>
+		<td><input type="text" th:field="*{description}"/></td>
 		<td th:if="${#fields.hasErrors('description')}" th:errors="*{description}" />
 	</tr>
 	
 	<tr>
 		<td><label>Cena</label></td>
-		<td><input type="text" th:field="*{price}"></td>
+		<td><input type="text" th:field="*{price}"/></td>
 		<td th:if="${#fields.hasErrors('price')}" th:errors="*{price}" />
 		
 	</tr>
 	<tr>
 		<td><label>Daudzums</label></td>
-		<td><input type="text" th:field="*{quantity}"></td>
+		<td><input type="text" th:field="*{quantity}"/></td>
 		<td th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}" />
 		
 	</tr>
