@@ -1,39 +1,49 @@
 package lv.venta.demo.models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+@Table(name="product_table")
+@Entity
 public class Product {
-    //Jekabs comment
+    
+	@Column(name="Id")
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
     private int id;
     
+	@Column(name="Title")
     @Size(min=4, max=20)
     @Pattern(regexp="[A-Z]{1}[a-z]+")
     private String title;
     
+	@Column(name="Description")
     @Size(min=5, max=20)
     @Pattern(regexp="[A-Z]{1}[a-z\\s]+")
     private String description;
 
+	@Column(name="Quantity")
     @Min(value=1)
     @Max(value=1000)
-	int quantity;
+	private int quantity;
     
-    @Min(value=0)
+	@Column(name="Price")
     @Max(value=10000)
+	@Min(value=0)
     private float price;
     
-    private static int counter = 1000;
-
     public int getId() {
         return id;
     }
-    public void setId() {
-        this.id = counter;
-        counter++;
-    }
+    
     public String getTitle() {
         return title;
     }
@@ -63,7 +73,6 @@ public class Product {
     }
     
     public Product(String title, String description, int quantity, float price) {
-    	setId();
     	setTitle(title);
     	setDescription(description);
     	setQuantity(quantity);
