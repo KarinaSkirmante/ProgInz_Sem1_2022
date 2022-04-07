@@ -137,12 +137,17 @@ public class MyFirstController {
 	}
 	
 	@PostMapping("/updateProduct/{id}")
-	public String postUpdateProduct(@PathVariable(name="id") int id, Product product)
+	public String postUpdateProduct(@PathVariable(name="id") int id, @Valid Product product, BindingResult result)
 	{
-		if(productCRUDService.updateProductById(id, product))
-			return "redirect:/allProducts/"+id; //tiks izsaukt localhost:8080/allProducts/2
+		if(!result.hasErrors())
+		{
+			if(productCRUDService.updateProductById(id, product))
+				return "redirect:/allProducts/"+id; //tiks izsaukt localhost:8080/allProducts/2
+			else
+				return "redirect:/error";//localhost:8080/error
+		}
 		else
-			return "redirect:/error";//localhost:8080/error
+			return "update-product-page";
 	}
 	
 	//kontrolieris izsauk  error lapas parādīšanos
