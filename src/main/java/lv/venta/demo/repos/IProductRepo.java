@@ -6,4 +6,7 @@ import lv.venta.demo.models.Product;
 
 public interface IProductRepo extends CrudRepository<Product, Integer> {
 
+	//select tiek izveidots automtiski
+	boolean existsByTitleAndDescription(String title, String description);
+
 }

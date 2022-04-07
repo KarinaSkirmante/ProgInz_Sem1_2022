@@ -3,78 +3,63 @@ package lv.venta.demo.services.impl;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lv.venta.demo.models.Product;
+import lv.venta.demo.repos.IProductRepo;
 import lv.venta.demo.services.ProductCRUD;
 
 @Service
 public class ProductCRUDImpl implements ProductCRUD {
 
-	private ArrayList<Product> allProducts = new ArrayList<>
-	(Arrays.asList(new Product("abols", "garsigs", 10, 0.99f),
-			new Product("bumbieris", "zals", 2, 0.12f), 
-			new Product("arbuzs", "salds", 3, 1.99f)));
-
+	@Autowired
+	private IProductRepo productRepo;
 	
 	@Override
 	public boolean createNewProduct(Product product) {
-		
-		boolean isFound = false;
-		for(Product pr: allProducts)
+		if(productRepo.existsByTitleAndDescription(product.getTitle(), product.getDescription()))
 		{
-			if(pr.getTitle().equals(product.getTitle()) && 
-					pr.getDescription().equals(product.getDescription()))
-					{
-						isFound = true;
-						break;
-					}
-		}
-		if(!isFound)
-		{
-			Product newProduct = new Product(product.getTitle(),
-				product.getDescription(), product.getQuantity(),
-				product.getPrice());
-		
-			allProducts.add(newProduct);
-			return true;
+			return false;
 		}
 		else
 		{
-			return false;
+			productRepo.save(product);
+			return true;
 		}
 	}
 
 	@Override
 	public ArrayList<Product> readAllProducts() {
-		return allProducts;
+		return (ArrayList<Product>) productRepo.findAll();
 	}
 
 	@Override
 	public Product readProductById(int id) throws Exception {
-		for(Product temp: allProducts)
+		
+		if(productRepo.existsById(id))
 		{
-			if(temp.getId()==id)
-			{
-				return temp;
-			}
+			Product prod = productRepo.findById(id).get();
+			return prod;
 		}
+		
+		
 		throw new Exception("Produkts neeksistē");
 		
 	}
 
 	@Override
 	public boolean updateProductById(int id, Product product) {
-		for(Product temp: allProducts)
+		if(productRepo.existsById(id))
 		{
-			if(temp.getId()==id)
-			{
-				temp.setTitle(product.getTitle());
-				temp.setDescription(product.getDescription());
-				temp.setPrice(product.getPrice());
-				temp.setQuantity(product.getQuantity());
+				Product prod = productRepo.findById(id).get();
+				prod.setTitle(product.getTitle());
+				prod.setDescription(product.getDescription());
+				prod.setPrice(product.getPrice());
+				prod.setQuantity(product.getQuantity());
+				productRepo.save(prod);
 				return true;
-			}			
+						
 		}
 		return false;
 	}
@@ -83,13 +68,10 @@ public class ProductCRUDImpl implements ProductCRUD {
 	public boolean deleteProductById(int id) {
 		//3. sameklējam konkrēto produktu pēc tā id
 		//4. dzēsam to produktu
-		for(Product temp: allProducts)
+		if(productRepo.existsById(id))
 		{
-			if(temp.getId()==id)
-			{
-				allProducts.remove(temp);
-				return true;
-			}
+			productRepo.deleteById(id);
+			return true;
 		}
 		return false;
 	}
