@@ -11,6 +11,9 @@
 			<td th:text="${temp.getDescription()}" />
 			<td th:text="${temp.getQuantity()}" />
 			<td th:text="${temp.getPrice()}" />
+			<td>
+			 <a th:href="@{/allProducts/{id}(id=${temp.getId()})}">view</a>
+			 </td>
 		</tr>
 	
 	</table>
